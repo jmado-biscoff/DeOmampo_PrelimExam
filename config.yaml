@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: true
+  vars:
+    username: "jmado"
+    name: "deomampo"
+  tasks:
+
+  - name: Install latest python3
+    apt:
+      name: python3
+
+  - name: Install pip3
+    apt:
+      name: python3-pip
+      update_cache: yes
+
+  - name: Set python3 as default python
+    shell: "alias python=python3"
+
+  - name: Set pip3 as defualt pip
+    shell: "alias pip=pip3"
+
+  - name: Install Java open-jdk v21
+    apt:
+      name: openjdk-21-jre-headless
+
+  - name: Installing MariaDB
+    apt:
+      name: mariadb-client-core-10.6
+
+  - name: Installing MariaDB Server
+    apt:
+      name: mariadb-server
+
+  - name: Message of the day
+    debug:
+      msg: "Ansible Managed node by {{username}}"
